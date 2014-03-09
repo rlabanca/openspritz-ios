@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "OSSpritz.h"
 
 @interface OpenSpritzDemoTests : XCTestCase {
     NSString *animalFarm;
@@ -32,6 +33,14 @@
 - (void)testExample
 {
     NSLog(@"");
+}
+
+- (void)testPivot
+{
+	for (NSString *word in [animalFarm componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]])
+	{
+		NSLog(@"pivot for %@ is %i", word, [OSSpritz findPivot:word]);
+	}
 }
 
 @end
