@@ -11,6 +11,7 @@
 @interface OSSpritz : NSObject
 
 + (int)offsetForWord:(NSString*)word;
++ (NSUInteger)findPivot:(NSString*)word;
 + (NSArray*)spritzString:(NSString*)text;
 
 @end

@@ -15,6 +15,27 @@
     return 4;
 }
 
+// pivot finding source, simplified.
++ (NSUInteger)findPivot:(NSString *)word
+{
+	NSUInteger wordLength = [word length];
+	NSUInteger pivot = (wordLength + 2) / 4;
+	if (pivot > 4)
+	{
+		pivot = 4;
+	}
+	
+	if ([word characterAtIndex:pivot] == ' ')
+	{
+		pivot--;
+	}
+	
+	NSAssert(pivot >= 0 && pivot < 5,@"pivot for word %@ out of range, computed as %i", word, pivot);
+	
+	return pivot;
+};
+
+
 + (NSArray*)spritzString:(NSString*)text
 {
     return [text componentsSeparatedByString:@" "];
@@ -156,6 +177,7 @@
 //        running = false;
 //    }
 //}
+
 
 // Find the red-character of the current word.
 //function pivot(word){
