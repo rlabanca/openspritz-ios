@@ -41,13 +41,14 @@
 - (void)setUp
 {
     font = [UIFont fontWithName:@"CourierNewPSMT" size:20.0f];
-    float charWidth = [@"m" sizeWithAttributes:@{NSFontAttributeName:font}].width+3;
+    float charWidth = [@"m" sizeWithAttributes:@{NSFontAttributeName:font}].width;
     for (int i = 0; i < 18; i++)
     {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(i*(charWidth+kInterspace), 0, charWidth, self.frame.size.height)];
         
         label.clipsToBounds = NO;
-        label.backgroundColor = [UIColor clearColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.backgroundColor = [UIColor lightGrayColor];
         if (i==(int)maxWordLength/2.0) label.textColor = [UIColor redColor];
         label.alpha = 0;
         label.text = @"m";
@@ -71,8 +72,9 @@
         return;
     }
     [self placeInLabels:spritzedText[currentWord]];
+    float timeMod = [OSSpritz timeForWord:spritzedText[currentWord]];
     currentWord++;
-    NSTimeInterval interval = 60.0 / (float)self.wordsPerMinute;
+    NSTimeInterval interval = 60.0 / (float)self.wordsPerMinute * timeMod;
     [self performSelector:@selector(start) withObject:nil afterDelay:interval];
 }
 

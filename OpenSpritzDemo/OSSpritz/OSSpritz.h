@@ -12,5 +12,5 @@
 
 + (int)offsetForWord:(NSString*)word;
 + (NSArray*)spritzString:(NSString*)text;
-
++ (float)timeForWord:(NSString*)word;
 @end

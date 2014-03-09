@@ -20,6 +20,11 @@
     return [text componentsSeparatedByString:@" "];
 }
 
++ (float)timeForWord:(NSString*)word
+{
+    return 1;
+}
+
 // Create the view from the remote resource.
 //function create_spritz(){
 //    
