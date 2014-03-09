@@ -21,8 +21,8 @@
 		6D582F2A18C947C800338C8D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D582F0C18C947C800338C8D /* UIKit.framework */; };
 		6D582F3218C947C800338C8D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D582F3018C947C800338C8D /* InfoPlist.strings */; };
 		6D582F3418C947C800338C8D /* OpenSpritzDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D582F3318C947C800338C8D /* OpenSpritzDemoTests.m */; };
-		6D582F4018C947E500338C8D /* OSSpritz.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D582F3F18C947E500338C8D /* OSSpritz.m */; };
-		6D582F4318CB342500338C8D /* OSSpritzLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D582F4218CB342500338C8D /* OSSpritzLabel.m */; };
+		6D582F4918CBFF3400338C8D /* OSSpritz.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D582F4618CBFF3400338C8D /* OSSpritz.m */; };
+		6D582F4A18CBFF3400338C8D /* OSSpritzLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D582F4818CBFF3400338C8D /* OSSpritzLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,10 +55,10 @@
 		6D582F2F18C947C800338C8D /* OpenSpritzDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenSpritzDemoTests-Info.plist"; sourceTree = "<group>"; };
 		6D582F3118C947C800338C8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D582F3318C947C800338C8D /* OpenSpritzDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenSpritzDemoTests.m; sourceTree = "<group>"; };
-		6D582F3E18C947E500338C8D /* OSSpritz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSSpritz.h; sourceTree = "<group>"; };
-		6D582F3F18C947E500338C8D /* OSSpritz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSSpritz.m; sourceTree = "<group>"; };
-		6D582F4118CB342500338C8D /* OSSpritzLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSSpritzLabel.h; sourceTree = "<group>"; };
-		6D582F4218CB342500338C8D /* OSSpritzLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSSpritzLabel.m; sourceTree = "<group>"; };
+		6D582F4518CBFF3400338C8D /* OSSpritz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSSpritz.h; sourceTree = "<group>"; };
+		6D582F4618CBFF3400338C8D /* OSSpritz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSSpritz.m; sourceTree = "<group>"; };
+		6D582F4718CBFF3400338C8D /* OSSpritzLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSSpritzLabel.h; sourceTree = "<group>"; };
+		6D582F4818CBFF3400338C8D /* OSSpritzLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSSpritzLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +118,7 @@
 		6D582F0E18C947C800338C8D /* OpenSpritzDemo */ = {
 			isa = PBXGroup;
 			children = (
-				6D582F3D18C947D200338C8D /* OpenSpritz */,
+				6D582F4418CBFF3400338C8D /* OSSpritz */,
 				6D582F1718C947C800338C8D /* OSAppDelegate.h */,
 				6D582F1818C947C800338C8D /* OSAppDelegate.m */,
 				6D582F1A18C947C800338C8D /* Main.storyboard */,
@@ -159,15 +159,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6D582F3D18C947D200338C8D /* OpenSpritz */ = {
+		6D582F4418CBFF3400338C8D /* OSSpritz */ = {
 			isa = PBXGroup;
 			children = (
-				6D582F3E18C947E500338C8D /* OSSpritz.h */,
-				6D582F3F18C947E500338C8D /* OSSpritz.m */,
-				6D582F4118CB342500338C8D /* OSSpritzLabel.h */,
-				6D582F4218CB342500338C8D /* OSSpritzLabel.m */,
+				6D582F4518CBFF3400338C8D /* OSSpritz.h */,
+				6D582F4618CBFF3400338C8D /* OSSpritz.m */,
+				6D582F4718CBFF3400338C8D /* OSSpritzLabel.h */,
+				6D582F4818CBFF3400338C8D /* OSSpritzLabel.m */,
 			);
-			name = OpenSpritz;
+			path = OSSpritz;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,10 +269,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D582F1918C947C800338C8D /* OSAppDelegate.m in Sources */,
-				6D582F4318CB342500338C8D /* OSSpritzLabel.m in Sources */,
+				6D582F4A18CBFF3400338C8D /* OSSpritzLabel.m in Sources */,
 				6D582F1518C947C800338C8D /* main.m in Sources */,
 				6D582F1F18C947C800338C8D /* OSViewController.m in Sources */,
-				6D582F4018C947E500338C8D /* OSSpritz.m in Sources */,
+				6D582F4918CBFF3400338C8D /* OSSpritz.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +481,7 @@
 				6D582F3918C947C800338C8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D582F3A18C947C800338C8D /* Build configuration list for PBXNativeTarget "OpenSpritzDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -489,6 +490,7 @@
 				6D582F3C18C947C800338C8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
