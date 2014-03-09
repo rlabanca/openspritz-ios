@@ -44,11 +44,11 @@
     float charWidth = [@"m" sizeWithAttributes:@{NSFontAttributeName:font}].width;
     for (int i = 0; i < 18; i++)
     {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(i*(charWidth+kInterspace), 0, charWidth, self.frame.size.height)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(i*(charWidth+kInterspace), 0, charWidth+2, self.frame.size.height)];
         
         label.clipsToBounds = NO;
         label.textAlignment = NSTextAlignmentCenter;
-        label.backgroundColor = [UIColor lightGrayColor];
+        label.backgroundColor = [UIColor clearColor];
         if (i==(int)maxWordLength/2.0) label.textColor = [UIColor redColor];
         label.alpha = 0;
         label.text = @"m";
