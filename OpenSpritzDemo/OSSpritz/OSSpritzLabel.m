@@ -11,6 +11,7 @@
 
 #define kInterspace 2.0f
 #define maxWordLength 18
+#define pivotChar 9
 
 @implementation OSSpritzLabel {
     UIFont *font;
@@ -48,7 +49,7 @@
         
         label.textAlignment = NSTextAlignmentCenter;
         label.backgroundColor = [UIColor clearColor];
-        if (i==(int)maxWordLength/2.0) label.textColor = [UIColor redColor];
+        if (i==pivotChar) label.textColor = [UIColor redColor];
         label.alpha = 0;
         label.text = @"m";
         [self addSubview:label];
@@ -56,6 +57,33 @@
     self.wordsPerMinute = 250;
     labelViews = [self.subviews copy];
     currentWord = 0;
+    [self drawGuideLines];
+}
+
+- (void)drawGuideLines
+{
+    {
+        float guideX = ((UIView*)labelViews[pivotChar]).center.x;
+        float guideHeight = 9;
+        //// Abstracted Attributes
+        UIBezierPath* upperLinePath = [UIBezierPath bezierPathWithRect:CGRectMake(0,  0, self.frame.size.width, 1)];
+        UIBezierPath* upperGuidePath = [UIBezierPath bezierPathWithRect:CGRectMake(guideX, 0, 1, guideHeight)];
+        UIBezierPath* downLinePath = [UIBezierPath bezierPathWithRect:CGRectMake(0, self.frame.size.height-1, self.frame.size.width, 1)];
+        UIBezierPath* downGuidePath = [UIBezierPath bezierPathWithRect:CGRectMake(guideX, self.frame.size.height-1-guideHeight, 1, guideHeight)];
+        
+        NSArray *paths = @[upperLinePath, upperGuidePath, downGuidePath, downLinePath];
+
+        
+        for (UIBezierPath *path in paths)
+        {
+            CAShapeLayer *line = [CAShapeLayer layer];
+            line.path=path.CGPath;
+            line.fillColor = [UIColor blackColor].CGColor;
+            line.opacity = 1.0;
+            line.strokeColor = nil;
+            [self.layer addSublayer:line];
+        }
+    }
 }
 
 - (void)setText:(NSString *)text
