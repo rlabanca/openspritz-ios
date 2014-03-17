@@ -41,13 +41,14 @@
 
 - (void)setUp
 {
-    font = [UIFont fontWithName:@"CourierNewPSMT" size:20.0f];
+    font = [UIFont fontWithName:@"Menlo-Bold" size:20.0f];
     float charWidth = [@"m" sizeWithAttributes:@{NSFontAttributeName:font}].width;
     for (int i = 0; i < 18; i++)
     {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(i*(charWidth+kInterspace), 0, charWidth, self.frame.size.height)];
         
         label.textAlignment = NSTextAlignmentCenter;
+        label.font = font;
         label.backgroundColor = [UIColor clearColor];
         if (i==pivotChar) label.textColor = [UIColor redColor];
         label.alpha = 0;
@@ -94,6 +95,7 @@
 
 - (void)start
 {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     if (currentWord >= [spritzedText count]) {
         currentWord = 0;
         return;
