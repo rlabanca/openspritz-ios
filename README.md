@@ -69,6 +69,6 @@ Considerations & Donations
 
 This started as an hobby project, with no intent to piss off the guys at **Spritz Inc.**. My main goal is to learn how to lead an open-source public project, so it's more of a learning experience than anything else. I hope you appreciate the effort ;)
 
-If you want to get some specific features implemented first or you need help to set it up in your own project, get in touch.
+If you want to get some specific features implemented first or you need help to set it up in your own project, [get in touch](mailto:ego@fr4ncis.net).
 
 To speed-up development [donations](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGWQ2AVJHZVVE) are very welcome.
