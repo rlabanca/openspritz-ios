@@ -4,15 +4,10 @@ OSSpritz
 
 An open-source implementation for iOS of the reading system developed by Spritz INC. The aim of this project was to port the functionality of the javascript implementation [OpenSpritz](https://github.com/Miserlou/OpenSpritz).
 
-
-
 Installation
 --------------
 
 OSSpritz can be installed by copying the files inside the *OSSpritz* directory. We will soon support Cocoapods to provide an even easier method to integrate it in your project.
-
-
-
 
 Getting started
 ---------------
@@ -62,11 +57,13 @@ You don't need to import OpenSpritzDemo project, but it's a good start to unders
 Contributors
 ------------
 
-Feel free to contribute to the project. I would like to thank [rmirabelli](https://github.com/rmirabelli) for his early contribution.
+This is an open-source project, feel free to contribute to the project. I would like to thank [rmirabelli](https://github.com/rmirabelli) for his early contribution.
 
 Considerations & Donations
 --------------------------
 
-This started as an hobby project, with no intent to piss off the guys at **Spritz Inc.**.
-This is an open-source project and 
-[Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGWQ2AVJHZVVE)
+This started as an hobby project, with no intent to piss off the guys at **Spritz Inc.**. My main goal is to learn how to lead an open-source public project, so it's more of a learning experience than anything else. I hope you appreciate the effort ;)
+
+If you want to get some specific features implemented first or you need help to set it up in your own project, get in touch.
+
+To speed-up development [donations](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YGWQ2AVJHZVVE) are very welcome.
