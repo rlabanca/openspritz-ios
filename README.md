@@ -7,7 +7,13 @@ An open-source implementation for iOS of the reading system developed by Spritz 
 Installation
 --------------
 
-OSSpritz can be installed by copying the files inside the *OSSpritz* directory. We will soon support Cocoapods to provide an even easier method to integrate it in your project.
+OSSpritz can be installed by copying the files inside the *OSSpritz* directory.
+
+There is also a *OpenSpritzDemo/OSSpritz.podspec* **podspec file** you can easily add OSSpritz to your project adding this line to your Podfile:
+
+	pod "OSSpritz", :podspec => "https://raw.github.com/Fr4ncis/openspritz-ios/master/OpenSpritzDemo/OSSpritz.podspec"
+	
+We will soon fully support Cocoapods to provide an even easier method to integrate it in your project.
 
 Getting started
 ---------------
@@ -22,7 +28,6 @@ or **inside a nib file** by creating in Interface Builder a UIView and then in t
 
 Don't forget to use either `#import "OSSpritzLabel.h"` or `#import <OSSpritzLabel.h>` (when using Cocoapods) in the classes referencing the OSSpritzLabel object.
 
-There is also a *OpenSpritzDemo/OSSpritz.Podspec* **podspec file**
 ### How to use it
 
 The interface is really straightforward:
