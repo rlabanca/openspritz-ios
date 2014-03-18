@@ -18,19 +18,23 @@
 // pivot finding source, simplified.
 + (NSUInteger)findPivot:(NSString *)word
 {
+    if(word == nil || [word length] == 0) return 0;
+
 	NSUInteger wordLength = [word length];
 	NSUInteger pivot = (wordLength + 2) / 4;
 	if (pivot > 4)
 	{
 		pivot = 4;
 	}
-	
+    
+    
 	if ([word characterAtIndex:pivot] == ' ')
 	{
 		pivot--;
 	}
-	
-	NSAssert(pivot >= 0 && pivot < 5,@"pivot for word %@ out of range, computed as %i", word, pivot);
+
+
+	NSAssert(pivot >= 0 && pivot < 5,@"pivot for word \'%@\' out of range, computed as %i", word, pivot);
 	
 	return pivot;
 };
