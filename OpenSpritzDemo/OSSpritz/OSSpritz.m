@@ -18,7 +18,7 @@
 // pivot finding source, simplified.
 + (NSUInteger)findPivot:(NSString *)word
 {
-    if(word == nil || [word length] == 0) return 0;
+    if([word length] == 0) return 0;
 
 	NSUInteger wordLength = [word length];
 	NSUInteger pivot = (wordLength + 2) / 4;
