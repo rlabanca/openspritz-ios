@@ -8,6 +8,8 @@
 
 #import "OSSpritz.h"
 
+#import "OSSpritz.h"
+
 @implementation OSSpritz
 
 + (int)offsetForWord:(NSString*)word
@@ -16,12 +18,12 @@
 }
 
 // pivot finding source, simplified.
-+ (NSUInteger)findPivot:(NSString *)word
++ (int)findPivot:(NSString *)word
 {
     if([word length] == 0) return 0;
-
-	NSUInteger wordLength = [word length];
-	NSUInteger pivot = (wordLength + 2) / 4;
+    
+	int wordLength = (int)[word length];
+	int pivot = (wordLength + 2) / 4;
 	if (pivot > 4)
 	{
 		pivot = 4;
@@ -32,8 +34,8 @@
 	{
 		pivot--;
 	}
-
-
+    
+    
 	NSAssert(pivot >= 0 && pivot < 5,@"pivot for word \'%@\' out of range, computed as %i", word, pivot);
 	
 	return pivot;
@@ -42,7 +44,22 @@
 
 + (NSArray*)spritzString:(NSString*)text
 {
-    return [text componentsSeparatedByString:@" "];
+    NSMutableArray *separated = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" \n"]] mutableCopy];
+    for (int i = 0; i < [separated count]; i++)
+    {
+        if ([separated[i] length] > 13)
+        {
+            int separateAt = floorf([separated[i] length]/2.0);
+            NSInteger dashLocation = [separated[i] rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]].location;
+            if (dashLocation != NSNotFound) separateAt = (int)dashLocation;
+            NSString *firstString = [[separated[i] substringToIndex:separateAt] stringByAppendingString:@"-"];
+            NSString *secondString = [separated[i] substringFromIndex:separateAt+(separateAt==dashLocation?1:0)];
+            [separated removeObjectAtIndex:i];
+            [separated insertObject:firstString atIndex:i];
+            [separated insertObject:secondString atIndex:i+1];
+        }
+    }
+    return separated;
 }
 
 + (float)timeForWord:(NSString*)word

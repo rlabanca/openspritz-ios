@@ -9,9 +9,24 @@
 #import <UIKit/UIKit.h>
 
 @interface OSSpritzLabel : UIView
+
 @property (nonatomic, strong) NSString *text;
-@property (nonatomic, assign) int wordsPerMinute;
+@property (nonatomic, assign) NSInteger wordsPerMinute;
 
 - (void)start;
 - (void)pause;
+- (void)gotoWordAtLocation:(int)location;
+
+@end
+
+@protocol OSSpritzLabelDelegate <NSObject>
+
+- (void)highlightRange:(NSRange)range;
+
+@end
+
+@interface OSSpritzLabel ()
+
+@property (nonatomic, strong) id<OSSpritzLabelDelegate> delegate;
+
 @end

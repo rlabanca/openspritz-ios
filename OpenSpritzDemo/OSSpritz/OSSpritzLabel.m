@@ -17,6 +17,7 @@
     UIFont *font;
     NSArray *labelViews;
     NSArray *spritzedText;
+    NSInteger currentChar;
     int currentWord;
 }
 
@@ -58,6 +59,7 @@
     self.wordsPerMinute = 250;
     labelViews = [self.subviews copy];
     currentWord = 0;
+    currentChar = 0;
     [self drawGuideLines];
 }
 
@@ -73,7 +75,7 @@
         UIBezierPath* downGuidePath = [UIBezierPath bezierPathWithRect:CGRectMake(guideX, self.frame.size.height-1-guideHeight, 1, guideHeight)];
         
         NSArray *paths = @[upperLinePath, upperGuidePath, downGuidePath, downLinePath];
-
+        
         
         for (UIBezierPath *path in paths)
         {
@@ -98,13 +100,66 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     if (currentWord >= [spritzedText count]) {
         currentWord = 0;
+        currentChar = 0;
         return;
     }
-    [self placeInLabels:spritzedText[currentWord]];
+    
+    [self displayStringAndHighlight];
+    
     float timeMod = [OSSpritz timeForWord:spritzedText[currentWord]];
+    
     currentWord++;
     NSTimeInterval interval = 60.0 / (float)self.wordsPerMinute * timeMod;
     [self performSelector:@selector(start) withObject:nil afterDelay:interval];
+}
+
+- (BOOL)characterIsPartOfWordAtLocation:(int)location
+{
+    static NSCharacterSet *separatorCharset;
+    separatorCharset = [NSCharacterSet characterSetWithCharactersInString:@" \n"];
+    return [[_text substringWithRange:(NSRange){location, 1}] stringByTrimmingCharactersInSet:separatorCharset].length == 0;
+}
+
+- (void)gotoWordAtLocation:(int)location
+{
+    while ([self characterIsPartOfWordAtLocation:location]) {
+        location++;
+    }
+    
+    // find currentWord and sets currentChar from char position
+    currentChar = location;
+    NSString *partial = [_text substringToIndex:currentChar+1];
+    //NSLog(@"partial: %@", partial);
+    NSArray *spritzPartial = [OSSpritz spritzString:partial];
+    int i = 0;
+    while ([spritzPartial[i] isEqualToString:spritzedText[i]] && i < [spritzPartial count]-1) { i++; }
+    //NSLog(@"last word: %@", spritzPartial[i]);
+    currentChar -= [spritzPartial[i] length];
+    currentChar = MAX(currentChar, 0); // fix issue with first word
+    currentWord = i;
+    
+    [self displayStringAndHighlight];
+}
+
+- (void)displayStringAndHighlight
+{
+    NSString *currentWordStr = spritzedText[currentWord];
+    [self placeInLabels:currentWordStr];
+    //NSLog(@"search in: %@", [_text substringWithRange:(NSRange){currentChar,[_text length]-currentChar}]);
+    if ([currentWordStr length] > 0 && [[currentWordStr substringFromIndex:([currentWordStr length]-1)] isEqualToString:@"-"])
+    {
+        currentWordStr = [currentWordStr substringToIndex:[currentWordStr length]-1];
+    }
+    NSRange range = [_text rangeOfString:currentWordStr options:NSLiteralSearch range:(NSRange){currentChar,[_text length]-currentChar}];
+    if (range.location != NSNotFound)
+    {
+        currentChar = range.location + range.length;
+        //NSLog(@"Range: %d %d", range.location, range.length);
+        if ([self.delegate respondsToSelector:@selector(highlightRange:)])
+        {
+            [self.delegate highlightRange:range];
+        }
+    }
 }
 
 - (void)placeInLabels:(NSString*)word
@@ -115,7 +170,7 @@
         UILabel *label = ((UILabel*)labelViews[i]);
         if (i < offset)
         {
-        label.alpha = 0;
+            label.alpha = 0;
         }
         else if (i >= offset && i < word.length + offset)
         {
@@ -133,7 +188,5 @@
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
-
-
 
 @end
