@@ -13,15 +13,18 @@
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, assign) NSInteger wordsPerMinute;
 
+- (float)progress;
 - (void)start;
 - (void)pause;
 - (void)gotoWordAtLocation:(int)location;
+- (void)setProgressWithWord:(int)wordIndex Char:(int)charLocation;
 
 @end
 
 @protocol OSSpritzLabelDelegate <NSObject>
 
 - (void)highlightRange:(NSRange)range;
+- (void)didMoveToCurrentWord:(NSUInteger)currentWord Char:(NSUInteger)currentChar;
 
 @end
 
@@ -30,3 +33,4 @@
 @property (nonatomic, strong) id<OSSpritzLabelDelegate> delegate;
 
 @end
+

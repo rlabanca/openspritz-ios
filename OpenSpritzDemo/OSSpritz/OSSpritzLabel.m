@@ -13,12 +13,23 @@
 #define maxWordLength 18
 #define pivotChar 9
 
+@implementation NSString (Additions)
+
+- (NSRange)safeRangeOfString:(NSString *)aString options:(NSStringCompareOptions)mask range:(NSRange)searchRange
+{
+    if (searchRange.location > self.length) searchRange.location = 0;
+    if ((searchRange.location + searchRange.length) > self.length) searchRange.length = self.length - searchRange.location;
+    return [self rangeOfString:aString options:mask range:searchRange];
+}
+
+@end
+
 @implementation OSSpritzLabel {
     UIFont *font;
     NSArray *labelViews;
     NSArray *spritzedText;
-    NSInteger currentChar;
-    int currentWord;
+    NSUInteger currentChar;
+    NSUInteger currentWord;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -104,7 +115,8 @@
         return;
     }
     
-    [self displayStringAndHighlight];
+    NSRange range = [self displayStringAndHighlight];
+    if (range.location != NSNotFound) currentChar = range.location + range.length;
     
     float timeMod = [OSSpritz timeForWord:spritzedText[currentWord]];
     
@@ -113,12 +125,17 @@
     [self performSelector:@selector(start) withObject:nil afterDelay:interval];
 }
 
+// moves to the first word after the tapped point
+
 - (BOOL)characterIsPartOfWordAtLocation:(int)location
 {
+    if (!self.text) return NO;
     static NSCharacterSet *separatorCharset;
-    separatorCharset = [NSCharacterSet characterSetWithCharactersInString:@" \n"];
+    separatorCharset = [NSCharacterSet characterSetWithCharactersInString:@" \n\t"];
     return [[_text substringWithRange:(NSRange){location, 1}] stringByTrimmingCharactersInSet:separatorCharset].length == 0;
 }
+
+// when tapped on the textview get a locations and finds the current char / word
 
 - (void)gotoWordAtLocation:(int)location
 {
@@ -129,37 +146,58 @@
     // find currentWord and sets currentChar from char position
     currentChar = location;
     NSString *partial = [_text substringToIndex:currentChar+1];
-    //NSLog(@"partial: %@", partial);
     NSArray *spritzPartial = [OSSpritz spritzString:partial];
+    
+    
     int i = 0;
     while ([spritzPartial[i] isEqualToString:spritzedText[i]] && i < [spritzPartial count]-1) { i++; }
-    //NSLog(@"last word: %@", spritzPartial[i]);
-    currentChar -= [spritzPartial[i] length];
-    currentChar = MAX(currentChar, 0); // fix issue with first word
+    
+    currentChar = (currentChar > [spritzPartial[i] length] ? currentChar - [spritzPartial[i] length] : 0);
     currentWord = i;
     
     [self displayStringAndHighlight];
 }
 
-- (void)displayStringAndHighlight
+// puts the string in the label and highlights the range in the textview
+
+- (NSRange)displayStringAndHighlight
 {
+    //NSLog(@"Display word: %d char: %d", currentWord, currentChar);
+    if (!spritzedText) return (NSRange){NSNotFound, 0};
+    
     NSString *currentWordStr = spritzedText[currentWord];
     [self placeInLabels:currentWordStr];
-    //NSLog(@"search in: %@", [_text substringWithRange:(NSRange){currentChar,[_text length]-currentChar}]);
+    
+    if (currentWordStr.length == 0) return (NSRange){NSNotFound, 0}; // nothing to highlight
+    
+    // if last char of current word is - removes it for the search
     if ([currentWordStr length] > 0 && [[currentWordStr substringFromIndex:([currentWordStr length]-1)] isEqualToString:@"-"])
     {
         currentWordStr = [currentWordStr substringToIndex:[currentWordStr length]-1];
     }
-    NSRange range = [_text rangeOfString:currentWordStr options:NSLiteralSearch range:(NSRange){currentChar,[_text length]-currentChar}];
+    
+    // Looks for the string in the text
+    NSRange range = [_text safeRangeOfString:currentWordStr options:NSLiteralSearch range:(NSRange){currentChar,[_text length]}];
+    
+    NSLog(@"Range: [%@ %@]", @(range.location), @(range.length));
+    NSAssert(!(range.location != NSNotFound && range.location > _text.length), @"Range found should not be over text length");
+    
     if (range.location != NSNotFound)
     {
-        currentChar = range.location + range.length;
-        //NSLog(@"Range: %d %d", range.location, range.length);
+        // currentChar = range.location + range.length;
+        // FIXME moves on currentChar.. review this
+        
+        if ([self.delegate respondsToSelector:@selector(didMoveToCurrentWord:Char:)])
+        {
+            [self.delegate didMoveToCurrentWord:currentWord Char:currentChar];
+        }
         if ([self.delegate respondsToSelector:@selector(highlightRange:)])
         {
             [self.delegate highlightRange:range];
         }
+        return range;
     }
+    return (NSRange){NSNotFound, 0};
 }
 
 - (void)placeInLabels:(NSString*)word
@@ -182,6 +220,25 @@
             label.alpha = 0;
         }
     }
+}
+
+// this is called only in the setup read
+
+- (void)setProgressWithWord:(int)wordIndex Char:(int)charLocation
+{
+    currentWord = wordIndex;
+    NSString *currentWordStr = spritzedText[currentWord];
+    currentChar = charLocation-currentWordStr.length;
+    [self displayStringAndHighlight];
+}
+
+- (float)progress
+{
+    if (spritzedText)
+    {
+        return currentWord/[spritzedText count];
+    }
+    return 0;
 }
 
 - (void)pause
