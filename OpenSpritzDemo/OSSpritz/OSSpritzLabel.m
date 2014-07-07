@@ -62,7 +62,7 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.font = font;
         label.backgroundColor = [UIColor clearColor];
-        if (i==pivotChar) label.textColor = [UIColor redColor];
+        if (i==pivotChar) label.textColor = [UIColor colorWithRed:0 green:122/256.0 blue:255/256.0 alpha:1.0];
         label.alpha = 0;
         label.text = @"m";
         [self addSubview:label];
@@ -81,18 +81,18 @@
         float guideHeight = 9;
         //// Abstracted Attributes
         UIBezierPath* upperLinePath = [UIBezierPath bezierPathWithRect:CGRectMake(0,  0, self.frame.size.width, 1)];
-        UIBezierPath* upperGuidePath = [UIBezierPath bezierPathWithRect:CGRectMake(guideX, 0, 1, guideHeight)];
+        UIBezierPath* upperGuidePath = [UIBezierPath bezierPathWithRect:CGRectMake(guideX, 0, 1, self.frame.size.height)];
         UIBezierPath* downLinePath = [UIBezierPath bezierPathWithRect:CGRectMake(0, self.frame.size.height-1, self.frame.size.width, 1)];
-        UIBezierPath* downGuidePath = [UIBezierPath bezierPathWithRect:CGRectMake(guideX, self.frame.size.height-1-guideHeight, 1, guideHeight)];
+        //UIBezierPath* downGuidePath = [UIBezierPath bezierPathWithRect:CGRectMake(guideX, self.frame.size.height-1-guideHeight, 1, guideHeight)];
         
-        NSArray *paths = @[upperLinePath, upperGuidePath, downGuidePath, downLinePath];
+        NSArray *paths = @[upperLinePath, upperGuidePath, downLinePath]; //, downLinePath];
         
         
         for (UIBezierPath *path in paths)
         {
             CAShapeLayer *line = [CAShapeLayer layer];
             line.path=path.CGPath;
-            line.fillColor = [UIColor blackColor].CGColor;
+            line.fillColor = [UIColor lightGrayColor].CGColor;
             line.opacity = 1.0;
             line.strokeColor = nil;
             [self.layer addSublayer:line];
