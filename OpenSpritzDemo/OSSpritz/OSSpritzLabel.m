@@ -62,7 +62,7 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.font = font;
         label.backgroundColor = [UIColor clearColor];
-        if (i==pivotChar) label.textColor = [UIColor colorWithRed:0 green:122/256.0 blue:255/256.0 alpha:1.0];
+        if (i==pivotChar) label.textColor = [UIColor redColor];
         label.alpha = 0;
         label.text = @"m";
         [self addSubview:label];

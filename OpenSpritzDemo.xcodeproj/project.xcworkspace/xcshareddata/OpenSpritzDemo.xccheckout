@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6313E5D5-CEF3-4F92-B9D8-94D04D9FB586</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OpenSpritzDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2F1617D4-0A7A-472C-885C-C625C454AA84</key>
+		<string>https://github.com/rlabanca/openspritz-ios</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>OpenSpritzDemo.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2F1617D4-0A7A-472C-885C-C625C454AA84</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/rlabanca/openspritz-ios</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2F1617D4-0A7A-472C-885C-C625C454AA84</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2F1617D4-0A7A-472C-885C-C625C454AA84</string>
+			<key>IDESourceControlWCCName</key>
+			<string>openspritz-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>
